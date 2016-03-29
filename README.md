@@ -8,12 +8,14 @@ Note: At present, this is only guaranteed to work correctly in Chrome.
 HOW TO USE:
 
 Input the class data. You have two options to do so: 
+
 1. Upon downloading the repository, open schedule.html. Enter the information requested.
    A "course" represents a subject that can be taught, whereas a "class" is a specific
    session of a course taught by a professor at a certain time. There can be many classes
    for a single course.
    Entering the data this way is more user-friendly, but won't save if the browser is
    closed or reloaded.
+
 2. The slightly more complicated way: open the source file schedule.js and modify the
    first two variables "courses" and "classes" to accomidate your schedule. There are
    commented examples in the file. This method has the advantage of staying across
