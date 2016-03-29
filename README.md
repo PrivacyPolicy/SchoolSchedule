@@ -8,4 +8,4 @@ TODO:
 - Provide fancier interface to be more user-friendly for the engineers
 - Save the data to avoid requiring the user to re-enter all the time
 - Allow easier input of time data... because military-time text-input sucks
-- Auto-scrape data from CAMS, because this is made for the Poly students
+- Scrape data from CAMS, because this is made for the Poly students
