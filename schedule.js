@@ -1,6 +1,6 @@
 // TODO: scrape data automatically
 var courses = [
-    
+    /*
     new Course("Design I", "skyblue", 3, 3),//0
     new Course("Computer Architecture & Organization", "green", 3, 4),//1
     new Course("Applied Cryptography", "orange", 3, 4),//2
@@ -14,10 +14,10 @@ var courses = [
     new Course("Digital Forensics", "#333", 3, 4),//10
     new Course("Programming Languages", "lightblue", 3, 4),//11
     new Course("Machine Learning", "tan", 3, 4)//12
-    
+    */
     ];
 var classes = [
-    
+    /*
     //new Class(0, "15:30-16:20 T, 9:00-11:05 F", "Staff"),
     //new Class(0, "15:30-16:20 T, 10:30-12:35 F", "Staff"),
     //new Class(0, "15:30-16:20 T, 13:30-15:35 F", "Staff"),
@@ -63,7 +63,7 @@ var classes = [
     
     new Class(12, "13:30-14:45 TR", "Feng Jen Yang"),
     new Class(12, "16:30-17:45 TR", "Sherif Rashad")
-    
+    */
     
     ];
 var results = [];
