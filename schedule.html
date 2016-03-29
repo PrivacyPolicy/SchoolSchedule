@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>Schedule</title>
+    
+<script src="TestChromeExt/jquery-1.12.1.min.js"></script>
+<script src=schedule.js></script>
+    
+<style>
+    body {
+        font-family: sans-serif;
+    }
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    th:first-child {
+        width: 45px;
+    }
+    table, th, td {
+        border: 1px solid lightgray;
+        border-collapse: collapse;
+    }
+    td.taken {
+        border: none;
+    }
+    th>div, td>div {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .red {
+        background: red;
+    }
+    
+    #credits::before {
+        content:"Credits: ";
+    }
+    .displaynone {
+        visibility: hidden;
+    }
+    #spinner:not(.displaynone) {
+        display: block;
+        left: 0; top: 0; bottom: 0; right: 0;
+        width: 100%; height: 100%; margin: 0;
+        background: rgba(0, 0, 0, .7);
+        color: white;
+        text-align: center;
+        position: fixed;
+        padding-top: 50%;
+    }
+    
+    input[type=number] {
+        width: 5em;
+    }
+    .dialog {
+        z-index: 2;
+        width: calc(90% - 2*20px);
+        position: fixed;
+        top: 50%; left: 5%;
+        transform: translateY(-50%);
+        padding: 20px;
+        background: white;
+    }
+    #blackground {
+        z-index: 1;
+        display: block;
+        left: 0; top: 0; bottom: 0; right: 0;
+        width: 100%; height: 100%; margin: 0;
+        background: rgba(0, 0, 0, .7);
+        position: fixed;
+    }
+    .dialog > span {
+        display: inline-block;
+        width: 10em;
+    }
+</style>
+    
+</head>
+<body>
+    <table id=table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    <button id=run>Calculate</button>
+    <span id=spinner class=displaynone>&nbsp;Loading...&nbsp;</span>
+    <input type=number id=curPage value=0 size=4 min=0 max=0>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id=delete>X</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span id=credits></span>
+    <br><br>
+    <input type=checkbox id=mil_time>Millitary Time
+    <br><br>
+    Goal Credits: <input id=goal_credits type=number value=15>
+    <input type=checkbox id=exact>(Exact)
+    <br>
+    Earliest Time: <input type=time id=earliest>
+    <br>
+    Latest Time: <input type=time id=latest>
+    <br><br>
+    <fieldset>
+        <legend>Must have:</legend>
+        <div id=must_contain>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Only on:</legend>
+        <div id=only_on>
+            <input type=checkbox name=on_days checked>Monday
+            <input type=checkbox name=on_days checked>Tuesday
+            <input type=checkbox name=on_days checked>Wednesday
+            <input type=checkbox name=on_days checked>Thursday
+            <input type=checkbox name=on_days checked>Friday
+        </div>
+    </fieldset>
+    
+    <!-- popup forms to get stuff -->
+    <!--<div id=blackground></div>
+    <div class=dialog id=input_courses>
+        <h3>New Course (e.g. Ethics, Differential Equations)</h3>
+        <hr>
+        <span>Course name</span>
+        <input placeholder="" id=form_cn><br>
+        <span>Color</span>
+        <input placeholder="" id=form_cl type=color value="#aaaaaa"><br>
+        <span>Credits</span>
+        <input placeholder="" id=form_cr type=number value=3><br>
+        <span>Level</span>
+        <input placeholder="" id=form_lv type=number value=3><hr>
+        <button class=save>Save</button>
+        <button class=done>All Done</button>
+    </div>
+    <div class="dialog displaynone" id=input_classes>
+        <h3>New Class (e.g. Ethics W/ Sarkisian @ 5:30-6:00 TR)</h3>
+        <hr>
+        <span>Course</span>
+        <select id=form_cc>
+            <option selected value=-1>Choose one:</option>
+        </select><br>
+        <span>Times*</span>
+        <input placeholder="" id=form_ti value=""><br>
+        <span>Professor</span>
+        <input placeholder="" id=form_pr><br><br>
+        *Time format: "13:00-15:15 TR, 11:30-13:00 F" or "8:30-9:00 MWF"
+        <hr>
+        <button class=save>Save</button>
+        <button class=done>All Done</button>
+    </div>-->
+</body>
+</html>
+
+
+
+
