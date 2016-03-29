@@ -1,4 +1,4 @@
-// TODO: scrape data automatically
+// alter these variables to contain your class's information
 var courses = [
     /*
     new Course("Design I", "skyblue", 3, 3),//0
@@ -67,7 +67,8 @@ var classes = [
     
     ];
 var results = [];
-         
+
+// Constructors
 function Course(name, color, credits, year) {
     this.name = name;
     this.color = color;
@@ -75,7 +76,6 @@ function Course(name, color, credits, year) {
     this.year = year;
     return this;
 }
-
 function Class(course, timeData, prof) {
     this.course = course;
     this.timeData = timeData;
@@ -83,6 +83,8 @@ function Class(course, timeData, prof) {
     return this;
 }
 
+// constants and variables for use in the algorithm.
+// these get updated with the user inputs
 const transparent = "rgba(0, 0, 0, 0)",
       TAKEN = "taken";
 var milTime = false,
@@ -94,9 +96,10 @@ var milTime = false,
     notOnDays =  [];
 
 
-
+// jQuery equivalent of onload. This is called when the page loads
 $(document).ready(function() {
 
+    // add the time values on the left and populate the empty table
     for (var i = 8 - 1; i < 12 + 7 - 1; i++) {
         for (var j = 0; j < 4; j++) {
             var text = (i + 1) + ":" + to2Str(j * 15);
@@ -106,7 +109,7 @@ $(document).ready(function() {
     }
     
     var input = $("#curPage");
-    $("#run").click(function() {
+    $("#run").click(function() { // when the calculate button is pressed
         this.disabled = true;
         $("#spinner").removeClass("displaynone");
         redTheBadTimes();
@@ -114,11 +117,11 @@ $(document).ready(function() {
         window.setTimeout(function() {
             results = [];
             resetSchedule();
-            solveSchedules(0);
+            solveSchedules(0); // recursive call, after which "results" will contain an array of integer lists
             input[0].value = 0;
             if (exactCredits) {
                 for (var i = results.length - 1; i >= 0; i--) {
-                    if (creditsOfResult(i) != goalCredits) {
+                    if (creditsOfResult(i) != goalCredits) { // reject any without exactly the right amount of credits
                         results.splice(i, 1);
                     }
                 }
@@ -130,11 +133,13 @@ $(document).ready(function() {
                 input[0].max = 0;
                 alert("Calculation Completed, no schedule exists.");
             }
-            showResult(0);
+            showResult(0);// display the result
             $("#run")[0].disabled = false;
             $("#spinner").addClass("displaynone");
         }, 10);
     });
+    
+    // when any of the inputs are clicked or changed, the below handle those events
     input.change(function() {
         var curVal = parseInt(input[0].value);
         if (curVal > results.length) {
@@ -150,7 +155,6 @@ $(document).ready(function() {
         input[0].max = results.length - 1;
     });
     
-    // odds and ends
     $("#mil_time").click(function() {
         milTime = this.checked;
         cellsToMilTime();
@@ -224,10 +228,10 @@ $(document).ready(function() {
         }
     }
     
-    cellsToMilTime(false);
+    cellsToMilTime(false); // turn the time to regular person time, not military time
     
     
-    // handle user input
+    // convert user input into actual data
     $("#input_courses > .save").click(function() {
         var a = $("#form_cn").val(),
             b = $("#form_cl").val(),
@@ -282,6 +286,9 @@ $(document).ready(function() {
     
 });
 
+
+// recursive function to find all schedules. It takes into account all of your configurations
+// please don't make me comment the inside of it, it's a mess as it is
 var credits = 0;
 var current = [];
 var curResult = [];
@@ -331,6 +338,7 @@ function solveSchedules(courseInd) {
     }
 }
 
+// check if the spot is valid. If so, place it.
 function displayClassForId(i) {
     aClass = classes[i];
     aCourse = courses[aClass.course];
@@ -342,6 +350,7 @@ function displayClassForId(i) {
     }
 }
     
+// Display a single result from the list of calculated results. It is displayed on the main table
 function showResult(ind) {
     if (results.length != 0) {
         resetSchedule();
@@ -357,6 +366,7 @@ function showResult(ind) {
     }
 }
     
+// calculate the credit value of a specific schedule from the results
 function creditsOfResult(ind) {
     if (results.length != 0) {
         var res = results[ind].split(","),
@@ -369,6 +379,7 @@ function creditsOfResult(ind) {
     }
 }
 
+// apply a red background to the times specified as "too early" and "too late"
 function redTheBadTimes() {
     var trs = document.getElementById("table").children[1].children;
 
@@ -385,6 +396,7 @@ function redTheBadTimes() {
     }
 }
 
+// check if the currently displayed schedule contains all of the user-required courses
 function hasAllRequiredCourses() {
     var data = $("#table > tbody").html();
     for (var i in mustContain) {
@@ -397,6 +409,7 @@ function hasAllRequiredCourses() {
     return true;
 }
 
+// simple function to return a string of x spaces
 function xSpaces(x) {
     var str = "";
     for (var i = 0; i < x; i++) {
@@ -405,10 +418,12 @@ function xSpaces(x) {
     return str;
 }
 
+// add the list to the results array
 function saveSchedule() {
     results.push(curResult.toString());
 }
 
+// unused
 function deleteTable(elem) {
     var par = elem.parentElement;
     var prev = elem.previousElementSibling;
@@ -420,12 +435,14 @@ function deleteTable(elem) {
     par.removeChild(elem);
 }
 
+// resets the table to all blank values
 function resetSchedule() {
     $("#table td:not(:first-child)").html("")
         .css("background", "transparent").removeClass(TAKEN)
         .attr("title", null);
 }
 
+// changes the entire page to military time or normal time, depending on the user's selection
 function cellsToMilTime() {
     var ind = 0;
     for (var i = 8 - 1; i < 12 + 7 - 1; i++) {
@@ -439,15 +456,18 @@ function cellsToMilTime() {
     }
 }
 
+// takes an int and turns it into a string with two characters, e.g. 4 -> "04"
 function to2Str(value) {
     var str = value + "";
     return ( (str.length == 1) ? "0" : "" ) + str;
 }
 
+// converts "13:00" to 1300
 function timeToInt(time) {
     return parseInt(time.split(":").join(""));
 }
 
+// converts a string "day" into a usable integer, plus two for some reason.
 function dayToInt(day) {
     var int;
     switch (day) {
@@ -473,6 +493,7 @@ function dayToInt(day) {
 }
 
 // timesData format: "8:30-10:15 M, 9:30-10:45 RF"
+// given a time interval, check to see if that spot on the table is available for during this time
 function isSpotValid(timesData) {
     var times = timesData.split(", ");
     for (jkljkljkl in times) {
@@ -522,6 +543,8 @@ function isSpotValid(timesData) {
     }
     return true;
 }
+
+// add a class at this location on the table (does not check for override)
 function addClass(timesData, name, prof, color, year) {
     var times = timesData.split(", ");
     for (jkljkljkl in times) {
@@ -598,6 +621,7 @@ function addClass(timesData, name, prof, color, year) {
     return true;
 }
 
+// removes the class from the specified location on the table
 function removeClass(timesData) {
     var times = timesData.split(", ");
     for (jkljkljkl in times) {
