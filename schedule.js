@@ -169,6 +169,7 @@ $(document).ready(function() {
         latest = timeToInt(this.value);
     })[0].value = to2Str(latest/100) + ":00";
     
+    $("#must_contain").html(null);
     for (var i = 0; i < courses.length; i++) {
         $("#must_contain").append("<input type=checkbox" +
             " value=" + i + " name=must_have>" +
@@ -259,6 +260,7 @@ $(document).ready(function() {
         $("#input_classes").addClass("displaynone");
         $("#blackground").addClass("displaynone");
         
+        $("#must_contain").html(null);
         for (var i = 0; i < courses.length; i++) {
             $("#must_contain").append("<input type=checkbox" +
                 " value=" + i + " name=must_have>" +
