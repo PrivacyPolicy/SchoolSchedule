@@ -6,6 +6,7 @@ Note: At present, this is only guaranteed to work correctly in Chrome.
 
 
 HOW TO USE:
+
 Input the class data. You have two options to do so: 
 1. Upon downloading the repository, open schedule.html. Enter the information requested.
    A "course" represents a subject that can be taught, whereas a "class" is a specific
