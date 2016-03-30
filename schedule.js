@@ -271,6 +271,7 @@ $(document).ready(function() {
                 courses[i].name + "<br>");
         }
         var mustHaves = $("[name=must_have]");
+        mustContain = [];
         for (var i = 0; i < mustHaves.length; i++) {
             mustHaves[i].addEventListener("click", function() {
                 mustContain = [];
@@ -280,7 +281,7 @@ $(document).ready(function() {
                     }
                 }
             });
-            mustHaves[i].checked = (mustContain.indexOf(i) != -1);
+            mustHaves[i].checked = false;
         }
     });
     
