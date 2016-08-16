@@ -75,6 +75,12 @@
         display: inline-block;
         width: 10em;
     }
+    
+    #codeEntry {
+        width: calc(100% - 2 * 3px);
+        resize: none;
+        height: 200px;
+    }
 </style>
     
 </head>
@@ -129,7 +135,13 @@
     
     <!-- popup forms to get stuff -->
     <div id=blackground></div>
-    <div class=dialog id=input_courses>
+    <div class=dialog id=input_code>
+        (Input code from the data scraper here)<br>
+        <textarea id=codeEntry></textarea>
+        <hr>
+        <button class=done>Done</button>
+    </div>
+    <!--<div class=dialog id=input_courses>
         <h3>New Course (e.g. Ethics, Differential Equations)</h3>
         <hr>
         <span>Course name</span>
@@ -158,7 +170,7 @@
         <hr>
         <button class=save>Save</button>
         <button class=done>All Done</button>
-    </div>
+    </div>-->
 </body>
 </html>
 
