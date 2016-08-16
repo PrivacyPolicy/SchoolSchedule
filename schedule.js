@@ -1,71 +1,6 @@
 // alter these variables to contain your class's information
-var courses = [
-    /*
-    new Course("Design I", "skyblue", 3, 3),//0
-    new Course("Computer Architecture & Organization", "green", 3, 4),//1
-    new Course("Applied Cryptography", "orange", 3, 4),//2
-    new Course("Software Security Testing", "#DDD", 3, 4),//3
-    new Course("Engineering and Technology Project Management", "#492F92", 3, 3),//4
-    new Course("Legal, Ethical, and Management Issues in Technology", "#222", 3, 2),//5
-    new Course("Ethics", "olive", 1, 2),//6
-    new Course("Computer Programming 2", "red", 3, 3),//7
-    new Course("Database 1", "yellow", 3, 3),//8
-    new Course("Ethical Hacking", "#AAA", 3, 4),//9
-    new Course("Digital Forensics", "#333", 3, 4),//10
-    new Course("Programming Languages", "lightblue", 3, 4),//11
-    new Course("Machine Learning", "tan", 3, 4)//12
-    */
-    ];
-var classes = [
-    /*
-    //new Class(0, "15:30-16:20 T, 9:00-11:05 F", "Staff"),
-    //new Class(0, "15:30-16:20 T, 10:30-12:35 F", "Staff"),
-    //new Class(0, "15:30-16:20 T, 13:30-15:35 F", "Staff"),
-    new Class(0, "16:30-17:20 T, 10:30-12:35 F", "Staff"),
-    new Class(0, "16:30-17:20 T, 13:30-15:35 F", "Staff"),
-    
-    new Class(1, "8:00-9:50 MW", "David Foster"),
-    new Class(1, "10:00-11:50 MW", "Staff"),
-    new Class(1, "16:00-17:50 MW", "David Foster"),
-    new Class(1, "16:00-17:50 MW", "Staff"),
-    
-    new Class(2, "15:00-16:15 MW", "Youssif Al-Nashif"),
-    new Class(2, "15:00-16:15 TR", "Staff"),
-    
-    new Class(3, "9:00-10:15 TR", "Staff"),
-    new Class(5, "8:00-9:15 TR", "Staff"),
-    new Class(9, "14:30-15:45 TR", "Staff"),
-    new Class(10, "12:00-13:15 TR", "Staff"),
-    
-    
-    new Class(4, "16:30-17:45 TR", "Jim Mennie"),
-    new Class(4, "18:00-19:15 TR", "Jim Mennie"),
-    new Class(4, "12:00-14:30 M", "Shoaib Shaikh"),
-    
-    new Class(6, "9:30-10:20 M", "Staff"),
-    new Class(6, "10:30-11:20 M", "Staff"),
-    new Class(6, "13:30-14:20 T", "Staff"),
-    new Class(6, "14:30-15:20 W", "Staff"),
-    new Class(6, "15:30-16:20 W", "Staff"),
-    new Class(6, "13:30-14:20 R", "Staff"),
-    
-    
-    new Class(7, "8:00-9:50 TR", "Staff"),
-    new Class(7, "14:00-15:50 TR", "Staff"),
-    
-    new Class(8, "10:30-11:45 MW", "Jennifer Staab"),
-    new Class(8, "10:30-11:45 TR", "Staff"),
-    
-    new Class(11, "13:30-14:45 TR", "Staff"),
-    new Class(11, "15:00-16:15 MW", "Staff"),
-    new Class(11, "15:00-16:15 MW", "Staff"),
-    
-    
-    new Class(12, "13:30-14:45 TR", "Feng Jen Yang"),
-    new Class(12, "16:30-17:45 TR", "Sherif Rashad")
-    */
-    
-    ];
+var courses = [];
+var classes = [];
 var results = [];
 
 // Constructors
@@ -232,43 +167,70 @@ $(document).ready(function() {
     
     
     // convert user input into actual data
-    $("#input_courses > .save").click(function() {
-        var a = $("#form_cn").val(),
-            b = $("#form_cl").val(),
-            c = $("#form_cr").val(),
-            d = $("#form_lv").val();
-        courses.push(new Course(a, b, parseInt(c), parseInt(d)));
-        $("#form_cn").val(null);
-        $("#form_cl").val("#aaaaaa");
-        $("#form_cr").val(3);
-        $("#form_lv").val(3);
-    });
-    $("#input_courses > .done").click(function() {
-        $("#input_courses").addClass("displaynone");
-        $("#input_classes").removeClass("displaynone");
-        var select = $("#input_classes > select");
-        for (var i in courses) {
-            select.append("<option value=" + i + ">" + courses[i].name +
-                          "</option>");
+//    $("#input_courses > .save").click(function() {
+//        var a = $("#form_cn").val(),
+//            b = $("#form_cl").val(),
+//            c = $("#form_cr").val(),
+//            d = $("#form_lv").val();
+//        courses.push(new Course(a, b, parseInt(c), parseInt(d)));
+//        $("#form_cn").val(null);
+//        $("#form_cl").val("#aaaaaa");
+//        $("#form_cr").val(3);
+//        $("#form_lv").val(3);
+//    });
+//    $("#input_courses > .done").click(function() {
+//        $("#input_courses").addClass("displaynone");
+//        $("#input_classes").removeClass("displaynone");
+//        var select = $("#input_classes > select");
+//        for (var i in courses) {
+//            select.append("<option value=" + i + ">" + courses[i].name +
+//                          "</option>");
+//        }
+//    });
+//    $("#input_classes > .save").click(function() {
+//        var a = $("#form_cc").val(),
+//            b = $("#form_ti").val(),
+//            c = $("#form_pr").val();
+//        classes.push(new Class(parseInt(a), b, c));
+//        $("#form_cc").val(-1);
+//        $("#form_ti, #form_pr").val(null);
+//    });
+//    $("#input_classes > .done").click(function() {
+//        $("#input_classes").addClass("displaynone");
+//        $("#blackground").addClass("displaynone");
+//        
+//    });
+    var $code = $("#codeEntry");
+    $code.val(localStorage["previousCode"] || "");
+    
+    $("#input_code > .done").click(function(event) {
+        if ($code.val() != "") {
+            try {
+                eval($code.val());
+                if (courses.length <= 0 || classes.length <= 0) {
+                    throw "Invalid input error.";
+                }
+                localStorage["previousCode"] = $code.val();
+                initInputs();
+            } catch (e) {
+                alert("Invalid code input.");
+                $code.val("");
+            }
+        } else {
+            alert("No code input.");
         }
     });
-    $("#input_classes > .save").click(function() {
-        var a = $("#form_cc").val(),
-            b = $("#form_ti").val(),
-            c = $("#form_pr").val();
-        classes.push(new Class(parseInt(a), b, c));
-        $("#form_cc").val(-1);
-        $("#form_ti, #form_pr").val(null);
-    });
-    $("#input_classes > .done").click(function() {
-        $("#input_classes").addClass("displaynone");
+    
+    function initInputs() {
+        $("#input_code").addClass("displaynone");
         $("#blackground").addClass("displaynone");
         
         $("#must_contain").html(null);
         for (var i = 0; i < courses.length; i++) {
             $("#must_contain").append("<input type=checkbox" +
                 " value=" + i + " name=must_have>" +
-                courses[i].name + "<br>");
+                courses[i].name + " (" +
+                courses[i].credits + ")<br>");
         }
         var mustHaves = $("[name=must_have]");
         mustContain = [];
@@ -283,8 +245,7 @@ $(document).ready(function() {
             });
             mustHaves[i].checked = false;
         }
-    });
-    
+    }
 });
 
 
